@@ -1,0 +1,57 @@
+syntax = "proto3";
+option java_multiple_files = false;
+option java_package = "grpc";
+
+message Animal {
+  int32 animalId = 1;
+  string animalType = 2;
+  double weight = 3;
+}
+
+message Part {
+  int32 partId = 1;
+  string partType = 2;
+  double weight = 3;
+}
+
+message Tray {
+  int32 trayId = 1;
+  string partType = 2;
+  double capacity = 3;
+}
+
+message Product {
+  oneof productType {
+    OnePart onePart = 1;
+    Mixed mixed = 2;
+  }
+}
+
+message OnePart {
+  Part part = 1;
+}
+
+message Mixed {
+  repeated Part parts = 1;
+}
+
+message GetAnimalProductsRequest {
+  int32 animalId = 1;
+}
+
+message GetAnimalProductsResponse {
+  repeated Product products = 1;
+}
+
+message GetProductAnimalsRequest {
+  int32 productId = 1;
+}
+
+message GetProductAnimalsResponse {
+  repeated Animal animals = 1;
+}
+
+service SlaughterhouseService {
+  rpc GetAnimalProducts(GetAnimalProductsRequest) returns (GetAnimalProductsResponse);
+  rpc GetProductAnimals(GetProductAnimalsRequest) returns (GetProductAnimalsResponse);
+}

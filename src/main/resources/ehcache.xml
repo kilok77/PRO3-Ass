@@ -1,0 +1,10 @@
+<ehcache>
+
+    <cache alias="userCache"
+           heap="100">
+        <expiry>
+            <ttl unit="seconds">600</ttl>  <!-- Time to live -->
+            <tti unit="seconds">300</tti>   <!-- Time to idle -->
+        </expiry>
+    </cache>
+</ehcache>
